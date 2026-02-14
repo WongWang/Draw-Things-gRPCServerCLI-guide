@@ -194,6 +194,8 @@ Docker provides easier setup and isolation but may have slightly lower performan
 #### Step 1: Install Docker Desktop
 
 1. Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop) for Windows
+   - Verify system requirements (Windows 10 64-bit: Pro, Enterprise, or Education version 21H2 or higher, or Windows 11)
+   - Ensure WSL2 is installed and updated before installing Docker Desktop
 2. Enable WSL2 backend in Docker Desktop settings
 3. Restart Docker Desktop
 
@@ -380,15 +382,18 @@ ps aux | grep gRPCServerCLI
 # 2. Check if server is listening
 netstat -tulpn | grep 50051
 
-# 3. Test connectivity from WSL2
-curl http://localhost:50051
+# 3. Test if port is accessible (check port connectivity only)
+nc -zv localhost 50051
+# Or install grpcurl for proper gRPC testing:
+# sudo apt install -y grpcurl
+# grpcurl -plaintext localhost:50051 list
 
 # 4. Check Windows port forwarding
 # (In PowerShell)
 netsh interface portproxy show all
 
 # 5. Test connectivity from another device
-# (On another computer or phone, use a network tool to ping Windows IP:port)
+# (On another computer or phone, use a network tool to test connectivity to Windows IP:port)
 ```
 
 **Solutions**:
